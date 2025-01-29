@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: restful-web-services
+  security:
+    user: # config app username and password to access rest apis
+      name: ${APP_USERNAME}
+      password: ${APP_PASSWORD}
+  datasource:
+#    url: jdbc:h2:mem:testdb
+    url: "jdbc:mysql://localhost:3310/social-media-database"
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    defer-datasource-initialization: true
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+  h2:
+    console:
+      enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+logging:
+  level:
+    org:
+      springframework: debug #default lvl hierarchy: fatal (no existing by default), error, warn, info, debug, trace

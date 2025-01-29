@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: spring-cloud-config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: ${GIT_LOCALCONFIG_REPO}
+          default-label: main
+# spring.cloud.config.server.git.default-label=main
+server:
+  port: 8888
+
+

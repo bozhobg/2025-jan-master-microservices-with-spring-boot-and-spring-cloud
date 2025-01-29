@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: limits-service
+  # different dependencies for client- and server-side to config server
+  config: # config server prop as CLIENT!
+    import: optional:configserver:http://localhost:8888
+  profiles:
+    active: dev
+  cloud:
+    config:
+      profile: dev
+#      name: file-name # config for diff file name
+limits-service:
+  min: 3
+  max: 997

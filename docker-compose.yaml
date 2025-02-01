@@ -1,0 +1,67 @@
+services:
+  currency-exchange:
+    image: in28min/mmv3-currency-exchange-service:0.0.1-SNAPSHOT
+    mem_limit: 700m
+    ports:
+      - "8000:8000"
+    networks:
+      # part of which defined network is this service (defined at EOF)
+      - currency-network
+    depends_on:
+      # what other services this service depends on
+      - naming-server
+    environment:
+      # eureka.client.service-url.defaultZone: http://localhost:8761/eureka
+      # setting up env var, using properties config from application.yaml
+      # capitals separated by underscore or dot -> both work
+      EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE: http://naming-server:8761/eureka
+      # naming server provides host names, localhost won't work inside container
+      # takes name from docker compose service declaration
+      MANAGEMENT_ZIPKIN_TRACING_ENDPOINT: http://zipkin-server:9411/api/v2/spans
+
+
+  currency-conversion:
+    image: in28min/mmv3-currency-conversion-service:0.0.1-SNAPSHOT
+    mem_limit: 700m
+    ports:
+      - "8100:8100"
+    networks:
+      - currency-network
+    depends_on:
+      - naming-server
+#      - currency-exchange # is it needed? NO
+    environment:
+      EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE: http://naming-server:8761/eureka
+      MANAGEMENT_ZIPKIN_TRACING_ENDPOINT: http://zipkin-server:9411/api/v2/spans
+
+  api-gateway:
+    image: in28min/mmv3-api-gateway:0.0.1-SNAPSHOT
+    mem_limit: 700m
+    ports:
+      - "8765:8765"
+    networks:
+      - currency-network
+    depends_on:
+      - naming-server
+    environment:
+      EUREKA.CLIENT.SERVICE-URL.DEFAULTZONE: http://naming-server:8761/eureka
+      MANAGEMENT.ZIPKIN.TRACING.ENDPOINT: http://zipkin-server:9411/api/v2/spans
+
+  naming-server:
+    image: in28min/mmv3-naming-server:0.0.1-SNAPSHOT
+    mem_limit: 700m
+    ports:
+      - "8761:8761"
+    networks:
+      - currency-network
+
+  zipkin-server:
+    image: openzipkin/zipkin:latest
+    mem_limit: 300m
+    ports:
+      - "9411:9411"
+    networks:
+      - currency-network
+
+networks:
+  currency-network:

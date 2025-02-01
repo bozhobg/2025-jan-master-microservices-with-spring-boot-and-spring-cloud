@@ -50,6 +50,8 @@ public class CurrencyConversionController {
 //                        uriVariables);
 
         ResponseEntity<CurrencyConversion> responseEntity = restTemplate.getForEntity(
+                // directly using localhost won't work if container is spun with eureka w/out api gateway
+                // feign uses eureka and works
                 "http://localhost:8000/currency-exchange/from/{from}/to/{to}",
                 CurrencyConversion.class,
                 uriVariables);

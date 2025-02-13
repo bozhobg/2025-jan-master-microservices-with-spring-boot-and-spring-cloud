@@ -40,7 +40,7 @@ Repository following code and examples in the course. Building on previous knowl
   - Intro to Spring Boot in 12 Steps
   - Intro to JUnit
   - Intro to Mockito
-  - Intro to Maven (had no previous knowledge on build systems)
-  - Intro to Gradle (had no previous knowledge)
+  - Intro to Maven
+  - Intro to Gradle
   - Intro to JPA in 10 Steps
   - Intro to Functional Programming in 30 min  

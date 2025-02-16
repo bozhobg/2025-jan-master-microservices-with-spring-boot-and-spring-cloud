@@ -5,7 +5,7 @@
 
 Repository following code and examples in the course. Building on previous knowledge and gaining understanding and hands on experiences with Spring Cloud, Microservices, Docker and cloud deployment with Kubernetes and Google Cloud. Mainly focused on Spring Boot 3 version of the course. Course gives concise and solid base with showcase of material taught.  
 
-[Course certificate](ude.my/UC-af73ad50-e55e-4e86-b55c-1b2d3d7295b4)
+[Course certificate](http://ude.my/UC-af73ad50-e55e-4e86-b55c-1b2d3d7295b4)
 
 ### Course Structure: 
 
